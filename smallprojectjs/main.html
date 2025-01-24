@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="main.css" />
+    <title>String Operations</title>
+  </head>
+  <body>
+    <h1 class="top">String Operations</h1>
+    <input type="text" id="ip" name="ip" placeholder="type here...!!!Note::For Angrams Enter two words with a ',' in between" />
+    <p id="result">Results</p>
+
+    <div class="container">
+      <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="uppercase()">
+            To Upper Case
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="lowercase()">
+            To Lower Case
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="camelcase()">
+            Camel Case
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-success btn-lg"
+            onclick="reversestring()"
+          >
+            Reverse String
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="countvowels()">
+            Vowel Count
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="countconsonants()">
+            Consonant Count
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="countwords()">
+            Word Count
+          </button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success btn-lg" onclick="mostfreqchar()">
+            Most Frequent Character
+          </button>
+        </div>
+        <div class="col ">
+          <button type="button" class="btn btn-success btn-lg" onclick="anagram()">
+            Check For Anagrams
+          </button>
+        </div>
+        <div class="col ">
+          <button type="button" class="btn btn-success btn-lg " onclick="longestword()">
+            Longest Words
+          </button>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function uppercase() {
+        var x = document.getElementById("ip").value;
+        y = x.toUpperCase();
+        document.getElementById("result").innerHTML = y;
+      }
+      function lowercase() {
+        var x = document.getElementById("ip").value;
+        y = x.toLowerCase();
+        document.getElementById("result").innerHTML = y;
+      }
+      function camelcase() {
+        var x = document.getElementById("ip").value;
+        arr = x.split(" ");
+        y = "";
+        arr.map((item) => {
+          y += item.charAt(0).toUpperCase();
+          y += item.slice(1).toLowerCase();
+          y += " ";
+        });
+        document.getElementById("result").innerHTML = y;
+      }
+      function reversestring() {
+        var x = document.getElementById("ip").value;
+        y = x.split("").reverse().join("");
+        document.getElementById("result").innerHTML = y;
+      }
+      function countvowels() {
+        var x = document.getElementById("ip").value;
+        var a = 0,
+          e = 0,
+          i = 0,
+          o = 0,
+          u = 0;
+
+        for (var j = 0; j < x.length; j++) {
+          var char = x[j].toLowerCase();
+          if (char === "a") {
+            a++;
+          } 
+          else if (char === "e") {
+            e++;
+          } 
+          else if (char === "i") {
+            i++;
+          } 
+          else if (char === "o") {
+            o++;
+          } 
+          else if (char === "u") {
+            u++;
+          }
+        }
+        total_vowels= a+e+i+o+u;
+
+        document.getElementById("result").innerHTML =
+          "Number of A's: " +
+          a +
+          " | Number of E's: " +
+          e +
+          " | Number of I's: " +
+          i +
+          " | Number of O's: " +
+          o +
+          " | Number of U's: " +
+          u +
+          " | Total Vowels :" +
+          total_vowels;
+      }
+      function countconsonants(){
+        var x = document.getElementById("ip").value;
+        var t=0,
+            b=0;
+        for (var j = 0; j < x.length; j++) {
+            var char = x[j].toLowerCase();
+            if (char === "a"|| char === "e"|| char=== "i"|| char=== "o"|| char=== "u"){
+                t++;
+                
+            }
+            else if( char===" "){
+                b++;
+            }
+        y=x.length-t-b;
+        document.getElementById("result").innerHTML = "Number of consonants are:" + y;
+
+
+      }
+    }
+    function countwords(){
+        var x = document.getElementById("ip").value;
+        y=x.split(" ").length
+        document.getElementById("result").innerHTML = "Number of words are:" + y;
+
+    }
+    function mostfreqchar(){
+    var x = document.getElementById("ip").value;
+    var charCount = {};
+    for (var i = 0; i < x.length; i++) {
+        var char = x[i].toLowerCase();
+        charCount[char] = (charCount[char] || 0) + 1;
+    }
+    var mostFreqChar = '';
+    var maxCount = 0;
+    
+    for (var char in charCount) {
+        if (charCount[char] > maxCount) {
+            mostFreqChar = char;
+            maxCount = charCount[char];
+        }
+    }
+    
+    document.getElementById("result").innerHTML = 
+        "Most frequent character: " + mostFreqChar + 
+        " | Frequency: " + maxCount;
+}
+function longestword() {
+    var x = document.getElementById("ip").value;
+    var z = x.split(' ');
+    var long = 0;
+    var longest_word = [];
+
+    for (var i = 0; i < z.length; i++) {
+        if (z[i].length > long) {
+            long = z[i].length;
+            longest_word = [z[i]];
+        }
+        else if (z[i].length === long) {
+            longest_word.push(z[i]);
+        }
+    }
+
+    document.getElementById("result").innerHTML = "Longest Word is: " + longest_word.join(', ');
+}
+
+function anagram(){
+  var x = document.getElementById("ip").value;
+  arr=x.split(",");
+  str1=arr[0];
+  str2=arr[1];
+  if (str1.toLowerCase().split('').sort().join('')===str2.toLowerCase().split('').sort().join('')){
+    y="Yes they are anagrams"
+  }
+  else {
+    y="They are not anagrams"
+  }
+  document.getElementById("result").innerHTML = y;
+
+}
+    </script>
+  </body>
+</html>

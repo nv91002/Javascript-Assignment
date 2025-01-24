@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.top{
+    font-size: 3.3em;
+    margin:20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    color: green;
+
+}
+#ip{
+    width: 97%;
+    height: 70px;
+    margin: 28px;
+    margin-left: 21px;
+    padding-left: 30px;
+    background-color: rgb(255, 250, 244);
+    border-radius: 10px;
+}
+#result{
+    display: flex;
+    justify-content: center;
+    width: 97%;
+    height: 70px;
+    margin: 28px;
+    margin-top: 10px;
+    margin-left: 21px;
+    padding-top: 23px;
+    padding-left: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(255, 250, 244);
+    border-radius: 10px;
+}
