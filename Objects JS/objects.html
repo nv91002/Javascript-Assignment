@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2.8em;
+        }
+        .ip{
+            display: flex;
+            justify-content: center;
+        }
+        input{
+            margin: 3%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            height: 60px;
+            width: 16%;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .bttn{
+            display: flex;
+            justify-content: center;
+
+        }
+        button{
+            background-color: rgb(155, 155, 255);
+            margin: 3%;
+            margin-top: 0;
+            margin-bottom: 1%;
+            height: 60px;
+            width: 10%;
+            color: white;
+            border-radius: 15px;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        button:hover{
+            background: rgb(86, 86, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="center">Calculator</h1>
+    </div>
+    <div class="ip">
+        <input type="text" name="num1" id="num1">
+        <input type="text" name="num2" id="num2">
+    </div>
+    <div class="bttn"> 
+        <button onclick="calculator.add()">Add</button>
+        <button onclick="calculator.sub()">Subtract</button>
+        <button onclick="calculator.mult()">Multiply</button>
+        <button onclick="calculator.divi()">Divide</button>
+    </div>
+    <div class="op">
+        <h1 class="center">Result: <span id="result"></span></h1>
+    </div>
+    <script>
+        calculator={
+           
+            add:function(){
+                x=Number(document.getElementById("num1").value)
+                y=Number(document.getElementById("num2").value)
+                a=x+y;
+                document.getElementById("result").innerHTML=a;
+            },
+            sub:function(){
+                x=Number(document.getElementById("num1").value)
+                y=Number(document.getElementById("num2").value)
+                s=x-y;
+                document.getElementById("result").innerHTML=s;
+            },
+            mult:function(){
+                x=Number(document.getElementById("num1").value)
+                y=Number(document.getElementById("num2").value)
+                m=x*y;
+                document.getElementById("result").innerHTML=m;
+            },
+            divi:function(){
+                x=Number(document.getElementById("num1").value)
+                y=Number(document.getElementById("num2").value)
+                if(y===0){
+                    document.getElementById("result").innerHTML="Cannot be divided Zero"
+                }else{
+                d=x/y;
+                document.getElementById("result").innerHTML=d;
+            }
+
+        }}
+        
+
+        
+    </script>
+    
+    
+</body>
+</html>
