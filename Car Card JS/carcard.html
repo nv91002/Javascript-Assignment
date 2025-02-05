@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+            /* box-sizing: border-box; */
+            color: white;
+            margin:0;
+            padding: 0;
+        }
+        .car{
+            background-color: white;
+            color: black;
+            width: fit-content;
+            padding: 3px;
+            border-radius: 7px;
+
+        }
+        .card{
+            /* border: 2px solid black; */
+            width: 400px;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgba(85, 97, 6, 0.796),rgba(255,0,0,0));
+            margin: auto;
+           
+        }
+        i{
+            color: black;
+        }
+        svg{
+            color: black;
+        }
+        .imgCont{
+            
+            width: 400px;
+            /* height: 400px; */
+        }
+        .carImg{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .content{
+            padding: 20px;
+            width:360px;
+            background-color: rgb(45, 158, 45);
+        }
+        .white{
+            height: 25px;
+            width: 25px;
+            background-color: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .black{
+            height: 25px;
+            width: 25px;
+            background-color: rgb(0, 0, 0);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .blue{
+            height: 25px;
+            width: 25px;
+            background-color: blue;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .pickcolor{
+            display: flex;
+            gap: 10px;
+        }
+        .CustomButton{
+            margin: 20px;
+            margin-left: 0px;
+            color: black;
+            background-color: white;
+            padding: 7px;
+            border-radius: 10px;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div class="card">
+        <div class="imgCont">
+            <img src="white.jpeg" alt="White Car" class="carImg">
+        </div>
+        <div class="content">
+            <div class="car">CAR</div>
+            <div class="description">
+                <h2>KIA Seltos</h2>
+                <p><i class="fa fa-car"></i> Mileage: 2,000 miles</p>
+                <p>  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="black" class="bi bi-fuel-pump" viewBox="0 0 16 16">
+                    <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z"/>
+                    <path d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z"/>
+                  </svg> Fuel: 25mpg</p>
+                <p><i class="fa fa-shield"></i>          Safety:<span class="fa fa-star checked" style="color: yellow;"></span>
+                    <span class="fa fa-star checked" style="color: yellow;"></span>
+                    <span class="fa fa-star checked" style="color: yellow;"></span>
+                    <span class="fa fa-star checked" style="color: yellow;"></span>
+                    <span class="fa fa-star"></span> </p>
+            </div>
+            <div>
+                <p>Pick a Color:</p>
+            </div>
+            <div class="pickcolor">
+                <button onclick="selectWhite()" class="white"></button>
+                <button onclick="selectBlack()" class="black"></button>
+                <button onclick="selectBlue()" class="blue"></button>
+                <span><strong>$134,345</strong></span>  <del>$150,499</del>
+            </div>
+            <div><button class="CustomButton">
+                <i class="fa fa-shopping-cart fontcolor"></i> Add To Cart
+            </button></div>
+
+        </div>
+    </div>
+    <script>
+        function selectWhite(){
+            document.querySelector(".car").style.backgroundColor ="white";
+            document.querySelector(".car").style.color ="black";
+            document.querySelector(".carImg").src="white.jpeg";
+            document.querySelector(".CustomButton").style.backgroundColor="white";
+            document.querySelector(".CustomButton").style.color="black";
+            document.querySelector(".fontcolor").style.color="black";
+
+
+       }
+       function selectBlack(){
+            document.querySelector(".car").style.backgroundColor ="black";
+            document.querySelector(".car").style.color ="white";
+            document.querySelector(".carImg").src="black.jpeg";
+            document.querySelector(".CustomButton").style.backgroundColor="black";
+            document.querySelector(".CustomButton").style.color="white";
+            document.querySelector(".fontcolor").style.color="white";
+
+
+       }
+       function selectBlue(){
+            document.querySelector(".car").style.backgroundColor ="blue";
+            document.querySelector(".car").style.color ="black";
+            document.querySelector(".carImg").src="blue.jpeg";
+            document.querySelector(".CustomButton").style.backgroundColor="blue";
+            document.querySelector(".CustomButton").style.color="black";
+            document.querySelector(".fontcolor").style.color="black";
+
+
+       }
+    </script>
+
+</body>
+</html>
