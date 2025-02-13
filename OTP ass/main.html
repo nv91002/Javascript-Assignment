@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$$$OTP SCAM$$$</title>
+    <style>
+        * {
+            /* margin: 0; */
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(224, 224, 224);
+        }
+
+        .getotp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* margin-bottom: 0; */
+
+        }
+
+        .container {
+            width: 37%;
+            padding: 30px;
+            margin: 7% auto;
+            background-color: white;
+            border-radius: 50px;
+            border: 10px solid rgb(135, 36, 227);
+        }
+        .container2{
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            padding: 30px;
+            margin: 7% auto;
+            background-color: white;
+            border-radius: 50px;
+            border: 10px solid rgb(135, 36, 227);
+        }
+
+        .test {
+            margin: 0 10px;
+            height: 30px;
+            width: 40px;
+            padding-left: 16px;
+            border-radius: 5px;
+            border: 1px solid grey;
+        }
+
+        .ipcont {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .subbtn {
+            margin: 20px 0px;
+        }
+
+        button {
+            background-color: rgb(135, 36, 227);
+            padding: 10px 20px;
+            border-radius: 7px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(37, 8, 64);
+
+        }
+
+        #otpdisplay {
+            color: rgb(135, 36, 227);
+            font-weight: bolder;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="getotp">
+            <h1>OTP Verification</h1>
+            <button onclick="otpgen()">Get OTP</button>
+            <p id="otpdisplay"></p>
+        </div>
+        <div class="ipcont">
+            <p>Please Enter The OTP sent your Screen</p>
+            <div class="ip">
+                <input type="text" class="test" id="0" maxlength="1">
+                <input type="text" class="test" id="1" maxlength="1">
+                <input type="text" class="test" id="2" maxlength="1">
+                <input type="text" class="test" id="3" maxlength="1">
+            </div>
+            <button onclick="verifyotp();" class="subbtn">Submit</button>
+        </div>
+    </div>
+    <div class="container2">
+        <h1>Welcome to Home Page!!!</h1>
+        <p>You have success fully verified your OTP</p>
+    </div>
+    <script>
+        var elts = document.getElementsByClassName('test')
+        Array.from(elts).forEach(function (elt) {
+            elt.addEventListener("keyup", function (event) {
+                if ((event.keyCode === 13 || elt.value.length == 1) && elt.nextElementSibling) {
+            elt.nextElementSibling.focus();
+        }
+            });
+        })
+        var otp;
+        function otpgen() {
+            otp = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+            document.getElementById('otpdisplay').innerHTML = otp;
+            console.log(otp)
+            return otp;
+        }
+        // console.log(otp)
+
+        function verifyotp() {
+            x1 = document.getElementById('0').value
+            x2 = document.getElementById('1').value
+            x3 = document.getElementById('2').value
+            x4 = document.getElementById('3').value
+            x = x1 + x2 + x3 + x4;
+            console.log(x)
+
+            if(x===otp.toString()){
+                document.querySelector('.container').style.display='none';
+                document.querySelector('.container2').style.display='flex';
+            }
+            else{
+                alert("You have entered wrong OTP ")
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
