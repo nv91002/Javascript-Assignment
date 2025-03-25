@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>To-Do-List Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: cursive;
+        }
+
+        body {
+            background-color: whitesmoke;
+        }
+
+        .flx {
+            display: flex;
+        }
+
+        #listRender {
+            /* border-radius: 30px; */
+            background-color: rgba(240, 224, 206, 0.843);
+            padding: 1.5%;
+            min-height: 400px;
+        }
+
+        .form-check {
+            /* border-bottom: 1px solid rgba(0, 0, 0, 0.484); */
+            /* display: flex;
+            justify-content: space-between; */
+            color: rgb(249, 236, 213);
+            border-radius: 10px;
+            padding-left: 5%;
+            height: 2em;
+        }
+
+        .form-check-label {
+            text-decoration: underline;
+            margin-left: 2%;
+            margin-top: 0.25em;
+            /*  */
+        }
+
+        .form-check input {
+            height: 1.5em;
+            width: 1.5em;
+        }
+
+        .customButtoon {
+            position: relative;
+            float: right;
+            top: 4px;
+            right: 10px;
+
+            background-color: rgb(92, 92, 234);
+            /* font-size: 1em; */
+            color: white;
+            /* width: 3%; */
+            padding: 0 2%;
+            border-radius: 8px;
+            border: none;
+            /* margin-left: 72%; */
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-center" style="font-family: cursive;"># To Do List Manager</h1>
+    <div class="flx">
+        <div class="container w-50 d-flex justify-content-center flex-column border-end border-3 border-dark p-2">
+            <div class="mb-3">
+                <label for="taskdetails" class="form-label">Task Details</label>
+                <input type="text" class="form-control" id="taskdetails">
+            </div>
+            <div class="mb-3 ">
+                <label for="Status" class="form-label">Status</label>
+                <select id="Status" class="form-select">
+                    <option>Select</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <button id="addTask" class="btn btn-primary">Add Task</button>
+        </div>
+        <hr>
+        <div class="container" id="listRender">
+
+        </div>
+    </div>
+
+
+    <script>
+        var obj = [];
+
+        function getFromLocal() {
+            const data = localStorage.getItem('User');
+            return data ? JSON.parse(data) : [];
+        }
+
+        function addtask() {
+            var task = document.getElementById('taskdetails').value;
+            var stat = document.getElementById('Status').value;
+            if (task && stat !== "Select") {
+                var subObj = { task: task, stat: stat };
+                obj.push(subObj);
+                document.getElementById('taskdetails').value = "";
+                document.getElementById('Status').value = "Select";
+                setToLocal(obj);
+                render();
+            }
+
+        }
+
+        function setToLocal(p) {
+            localStorage.setItem('User', JSON.stringify(p));
+        }
+        function updateTaskStatus(index, checked) {
+            const listFromLocal = getFromLocal();
+            listFromLocal[index].stat = checked ? 'Completed' : 'Pending';
+            setToLocal(listFromLocal);
+            obj = listFromLocal;
+            bgcolor(index);
+        }
+        function render() {
+            const listFromLocal = getFromLocal();
+            document.getElementById('listRender').innerHTML = listFromLocal.map((l, index) => `
+        <div class="form-check" id="taskcss${index}">
+        <input type="checkbox" class="form-check-input"  id="tasklist${index}" ${l.stat === 'Completed' ? 'checked' : ''} onchange="updateTaskStatus(${index}, this.checked)"">
+        <label class="form-check-label" for="tasklist${index}">${l.task}</label>
+         <button class="customButtoon " onclick="DeleteTask(${index})">Delete Task <i class="fa fa-trash-o"></i></button>
+        </div>`).join('');
+
+            listFromLocal.map((_, index) => {
+                bgcolor(index);
+            });
+
+        }
+        function DeleteTask(index) {
+            const listFromLocal = getFromLocal();
+            listFromLocal.splice(index, 1);
+            setToLocal(listFromLocal);
+
+            render();
+        }
+        function bgcolor(index) {
+            // console.log(document.getElementById('tasklist').checked)
+
+            if (document.getElementById(`tasklist${index}`).checked) {
+                document.getElementById(`taskcss${index}`).style.backgroundColor = `#285828aa`;
+            }
+            else {
+                document.getElementById(`taskcss${index}`).style.backgroundColor = `#ff000099`;
+            }
+        }
+
+        obj = getFromLocal();
+        document.getElementById('addTask').addEventListener('click', addtask);
+        render();
+
+        // console.log(document.getElementById('tasklist').checked);
+
+
+    </script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

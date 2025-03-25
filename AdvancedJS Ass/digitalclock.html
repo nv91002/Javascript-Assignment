@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Digital Clock</h3>
+    <h1><span id="hr"></span>:<span id="min"></span>:<span id="sec"></span></h1>
+    <button id="stopclock">Stop</button>
+    <button id="startclock">Start</button>
+    <hr>
+    <h3>Stop-Watch</h3>
+    <h1><span id="hr1"></span>:<span id="min1"></span>:<span id="sec1"></span></h1>
+    <button id="startwatch">Start</button>
+    <button id="stopwatch">Pause</button>
+    <button id="resetwatch">Reset</button>
+    <script>
+        // Digital Clock 
+        function digiClock() {
+            today = new Date();
+            hr = today.getHours();
+            min = today.getMinutes();
+            sec = today.getSeconds();
+            document.getElementById('hr').innerHTML = hr;
+            document.getElementById('min').innerHTML = min;
+            document.getElementById('sec').innerHTML = sec;
+        }
+        digiClock()
+        function startstop() {
+
+            x = setInterval(digiClock, 1000)
+        }
+        startstop()
+
+        document.getElementById('stopclock').addEventListener('click', () => {
+            clearInterval(x)
+
+        })
+        document.getElementById('startclock').addEventListener('click', startstop)
+
+        // StopWatch
+            var hr1=0;
+            var min1=0;
+            var sec1=0;
+            var x;
+        function timerwatch() {
+            // date = new Date();
+            // time = date.setHours(0, 0, 0, 0);
+            // console.log(time)
+            // hr1 = time.getHours();
+            // min1 = time.getMinutes();
+            // sec1= time.getSeconds();
+            // hr1=0;
+            // min1=0;
+            // sec1=0;
+            document.getElementById('hr1').innerHTML = hr1;
+            document.getElementById('min1').innerHTML = min1;
+            document.getElementById('sec1').innerHTML = sec1;
+
+        }
+        timerwatch();
+        function startwatch(){
+            x=setInterval(()=>{
+                sec1++;
+                if(sec1>=59){
+                    sec1=0;
+                    min1++;
+                }
+                else if(min1>=59&&sec1>=59){
+                    hr1++;
+                    sec1=0;
+                    min1=0;
+                }
+                document.getElementById('hr1').innerHTML = hr1;
+            document.getElementById('min1').innerHTML = min1;
+            document.getElementById('sec1').innerHTML = sec1;
+
+            },1000)
+        }
+        function stopwatch(){
+            clearInterval(x)
+        }
+        function reset(){
+            hr1=0;
+            min1=0;
+            sec1=0;
+            document.getElementById('hr1').innerHTML = hr1;
+            document.getElementById('min1').innerHTML = min1;
+            document.getElementById('sec1').innerHTML = sec1;
+
+        }
+        document.getElementById('startwatch').addEventListener('click',startwatch)
+        document.getElementById('stopwatch').addEventListener('click',stopwatch)
+        document.getElementById('resetwatch').addEventListener('click',reset)
+
+
+
+
+
+    </script>
+</body>
+
+</html>

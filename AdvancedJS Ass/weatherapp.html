@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            background: url('/Assets/bg1.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            margin-top: 5%;
+
+        }
+
+        .container {
+            width: 70%;
+            margin: auto;
+            display: none;
+            justify-content: space-evenly;
+            border-radius: 50px;
+            background-color: rgba(230, 230, 230, 0.669);
+
+        }
+
+        .inputDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            margin-top: 10%;
+            line-height: 2;
+            width: 120%;
+            padding-left: 2%;
+            border-radius: 20px;
+            border: 1px solid black;
+            background-color: rgba(230, 230, 230, 0.669);
+        }
+
+        button {
+            line-height: 2;
+            margin: 5% 0px;
+            background-color: rgba(255, 254, 254, 0.669);
+            border-radius: 10px;
+            border: 1px solid black;
+            padding: 1%;
+
+        }
+
+        .citydiv {
+            display: flex;
+            margin: 0;
+            color: rgb(0, 0, 0);
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 0px 8%;
+            border-right: 1px dashed rgba(0, 0, 0, 0.557);
+            border-left: 1px dashed rgba(0, 0, 0, 0.493);
+        }
+
+        .tempdetails {
+            display: flex;
+            margin: 0;
+            color: rgb(0, 0, 0);
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .country {
+            font-size: medium;
+            color: rgb(96, 96, 246);
+        }
+
+        .imgdiv {
+            width: 10%;
+
+        }
+
+        .imgdiv img {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        #temperature {
+            font-size: 3.8rem;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: rgb(0, 0, 0);
+
+
+        }
+
+        #main {
+            font-family: cursive;
+            text-decoration: underline;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container1">
+
+        <div class="inputDiv">
+            <h1 class="text-center" style="color: rgba(230, 230, 230, 0.669);">Weather Application</h1>
+            <input type="text" id="city" placeholder="Enter The Name of City">
+            <button id="getweather">Get Weather</button>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="imgdiv">
+            <img src=" " alt="" id="image">
+
+        </div>
+        <div class="main">
+            <h1 id="main"></h1>
+            <h5 id="wind"></h5>
+            <h5 id="sunrise"></h5>
+            <h5 id="sunset"></h5>
+        </div>
+        <div class="citydiv">
+            <h1 id="cityname"></h1>
+            <h4 id="temperature"></h4>
+        </div>
+        <div class="tempdetails">
+            <h5 id="feeltemp"></h5>
+            <h5 id="mintemp"></h5>
+            <h5 id="maxtemp"></h5>
+            <h5 id="humidity"></h5>
+        </div>
+
+    </div>
+    </div>
+    <script>
+        function render(data) {
+            console.log(data)
+            document.getElementById('cityname').innerHTML = `${data.name} <sup class='country'>${data.sys.country}</sup>`
+            document.getElementById('temperature').innerHTML = `${Math.floor(data.main.temp) - 1}<sup>o</sup>C`
+            document.getElementById('feeltemp').innerHTML = `Feels Like : ${data.main.feels_like}<sup>o</sup>C`
+            document.getElementById('mintemp').innerHTML = `Min_Temp : ${data.main.temp_min}<sup>o</sup>C`
+            document.getElementById('maxtemp').innerHTML = `Max_Temp : ${data.main.temp_max}<sup>o</sup>C`
+            document.getElementById('humidity').innerHTML = `Humidity : ${data.main.humidity}%`
+            document.getElementById('main').innerHTML = data.weather[0].main
+            document.getElementById('wind').innerHTML = `Windspeed : ${data.wind.speed}m/s`
+            document.getElementById('sunrise').innerHTML = `Sunrise : ${new Date(data.sys.sunrise * 1000).toUTCString().split(' ')[4]}`
+            document.getElementById('sunset').innerHTML = `Sunset : ${new Date(data.sys.sunset * 1000).toUTCString().split(' ')[4]}`
+            console.log(data.weather[0].main)
+
+            if (data.weather[0].main.includes('Clear')) {
+                document.getElementById('image').src = 'Assets/clear.png';
+            } else if (data.weather[0].main.includes('Clouds')) {
+                document.getElementById('image').src = 'Assets/cloudy.png';
+            } else if (data.weather[0].main.includes('ain')) {
+                document.getElementById('image').src = 'Assets/rain.png';
+            }
+            else if (data.weather[0].main.includes('rizzle')) {
+                document.getElementById('image').src = 'Assets/drizzle.png';
+            }
+            else if (data.weather[0].main.includes('understorm')) {
+                document.getElementById('image').src = 'Assets/thunderstorm.png';
+            }
+            else if (data.weather[0].main.includes('unny')) {
+                document.getElementById('image').src = 'Assets/sunnny.png';
+            }
+            else if (data.weather[0].main.includes('moke')) {
+                document.getElementById('image').src = 'Assets/smoke.png';
+            } else if (data.weather[0].main.includes('aze')) {
+                document.getElementById('image').src = 'Assets/haze.png';
+            }
+
+
+
+        }
+        function fetchapi() {
+            city = document.getElementById('city').value
+            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=6073ec22d6e0d11ca3405f7ba430a91e`)
+                .then(response => response.json())
+                .then(data => render(data))
+                .catch(error => console.log(error))
+            document.querySelector('.container').style.display = 'flex';
+        }
+        document.getElementById('getweather').addEventListener('click', fetchapi)
+    </script>
+
+
+
+</body>
+
+</html>

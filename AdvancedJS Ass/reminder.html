@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Event Reminder</h1>
+        <h3>Give Input in hours,minutes and seconds</h3>
+        <label for="event">Enter The Name of Reminder:</label>
+        <input type="text" id="event" placeholder="Enter The Name of Reminder">
+        <label for="hr"> Hours : </label>
+        <input type="number"  id="hr" placeholder="Hours">
+        <label for="min"> Minutes : </label>
+        <input type="number"  id="min" placeholder="Minutes">
+        <label for="hr"> Seconds : </label>
+        <input type="number" id="sec" placeholder="Seconds">
+        <button id="reminder">Set Reminder</button>
+        <h1 id="result"></h1>
+        <!-- <nikhil>Hello</nikhil> -->
+    </div>
+    <script>
+        document.getElementById('reminder').addEventListener('click', ()=>{
+            hr1 = document.getElementById('hr').value;
+            min1 = document.getElementById('min').value;
+            sec1 = document.getElementById('sec').value;
+            event = document.getElementById('event').value;
+            // console.log(hr1)
+            totaltime = hr1 * 3600;
+            totaltime += min1 * 60;
+            totaltime += sec1;
+            console.log(totaltime)
+            setTimeout(() => {
+                alert(event)
+            }, totaltime * 1000)
+        })
+
+
+    </script>
+
+</body>
+
+</html>

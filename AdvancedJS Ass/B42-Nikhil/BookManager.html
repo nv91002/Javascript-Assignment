@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Just adding a bit of spacing */
+        .margin{ 
+        margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Online Bookstore</h2>
+
+    <div class="row">
+        <!-- Add New Book Form -->
+        <div class="col-md-6">
+            <form onsubmit="addProduct(event)">
+                <h3>Add New Book</h3>
+                <div class="mb-3">
+                    <label class="form-label margin">Title</label>
+                    <input type="text" class="form-control" id="title">
+                    
+                    <label class="form-label margin">Author</label>
+                    <input type="text" class="form-control" id="author">
+                    
+                    <label class="form-label margin">Price</label>
+                    <input type="text" class="form-control" id="price">
+                    
+                    <label class="form-label margin">Quantity</label>
+                    <input type="text" class="form-control" id="quantity">
+                    
+                    <button type="submit" class="btn btn-primary margin">Add Book</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Update Quantity Form -->
+        <div class="col-md-6">
+            <form onsubmit="updateQuantity(event)">
+                <h3>Update Quantity</h3>
+                <div class="mb-3">
+                    <label class="form-label margin">Title</label>
+                    <input type="text" class="form-control" id="updateTitle">
+                    
+                    <label class="form-label margin">New Quantity</label>
+                    <input type="text" class="form-control" id="newQuantity">
+                    
+                    <button type="submit" class="btn btn-primary margin">Update Quantity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Book List Table -->
+    <div id="booksList" class="mt-4">
+        <h2>Books</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="booksTableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let books = JSON.parse(localStorage.getItem('books')) || [];
+
+    function saveBooks() {
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+
+    function renderList() {
+        let booksTableBody = document.getElementById('booksTableBody');
+        booksTableBody.innerHTML = books.map(book => `
+            <tr>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.price}</td>
+                <td>${book.quantity}</td>
+            </tr>
+        `).join('');
+    }
+
+    function addProduct(event) {
+        event.preventDefault();
+
+        let title = document.getElementById('title').value.trim();
+        let author = document.getElementById('author').value.trim();
+        let price = document.getElementById('price').value.trim();
+        let quantity = document.getElementById('quantity').value.trim();
+
+        if (!title || !author || !price || !quantity) {
+            alert("All fields are required");
+            return;
+        }
+
+        books.push({ title, author, price, quantity });
+        saveBooks();
+        renderList();
+
+        document.getElementById('title').value = '';
+        document.getElementById('author').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('quantity').value = '';
+    }
+
+    function updateQuantity(event) {
+        event.preventDefault();
+
+        let title = document.getElementById('updateTitle').value.trim();
+        let newQuantity = document.getElementById('newQuantity').value.trim();
+
+        if (!title || !newQuantity) {
+            alert("Both fields are required");
+            return;
+        }
+
+        let book = books.find(b => b.title.toLowerCase() === title.toLowerCase());
+        if (!book) {
+            alert("Book not found");
+            return;
+        }
+
+        book.quantity = newQuantity;
+        saveBooks();
+        renderList();
+
+        document.getElementById('updateTitle').value = '';
+        document.getElementById('newQuantity').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', renderList);
+</script>
+
+</body>
+</html>
